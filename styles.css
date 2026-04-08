@@ -577,3 +577,90 @@ section {
     text-align: center;
   }
 }
+
+/* FAQ Section */
+.faq {
+  padding: 80px 0;
+  background: var(--color-surface);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.faq-item h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.faq-item p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.faq-item code {
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--color-accent);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* Code Examples Section */
+.code-examples {
+  padding: 80px 0;
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+}
+
+.code-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.code-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.code-card h3 {
+  padding: 16px 24px;
+  background: rgba(99, 102, 241, 0.1);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-primary);
+}
+
+.code-card pre {
+  margin: 0;
+  padding: 24px;
+  overflow-x: auto;
+  background: #1e1e2e;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.code-card code {
+  color: #a9b1d6;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.code-cta {
+  text-align: center;
+}
