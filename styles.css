@@ -664,3 +664,135 @@ section {
 .code-cta {
   text-align: center;
 }
+
+/* ===== 优化新增样式 ===== */
+
+/* 社会证明条 */
+.hero-social-proof {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.proof-item {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding: 6px 12px;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.proof-item strong {
+  color: var(--color-accent);
+}
+
+/* 按钮点击反馈 */
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* 卡片 hover 光晕效果 */
+.feature-card:hover::before,
+.user-card:hover::before,
+.code-card:hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(99, 102, 241, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.feature-card,
+.user-card,
+.code-card {
+  position: relative;
+}
+
+/* 移动端汉堡菜单 */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* 移动端导航面板 */
+.nav-mobile-panel {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.nav-mobile-panel.active {
+  transform: translateX(0);
+}
+
+.nav-mobile-panel .nav-link {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
+  text-align: center;
+}
+
+/* 移动端响应式 */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero-social-proof {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .proof-item {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}
+
+/* 浮动按钮面板样式（已在 HTML 中内联） */
