@@ -490,11 +490,6 @@ console.log(msg.content[0].text);</code></pre>
       <div class="footer-content">
         <div class="footer-links">
           <a href="https://derouter.ai?ref=AI-KEY-TOP">首页</a>
-          <a href="https://derouter.ai/api">API 文档</a>
-          <a href="https://derouter.ai/referral">推荐返佣</a>
-        </div>
-        <div class="footer-social">
-          <a href="https://t.me/derouter_ai" target="_blank" rel="noopener">Telegram</a>
         </div>
         <p class="footer-copy">© 2025 derouter.ai-key.top · 此网站为推荐引流页面</p>
         <p class="footer-note">本站是 derouter.ai 的推荐合作伙伴，通过本站链接注册可获得专属优惠</p>
@@ -503,8 +498,81 @@ console.log(msg.content[0].text);</code></pre>
   </footer>
 
   <!-- Floating CTA -->
-  <a href="https://derouter.ai?ref=AI-KEY-TOP" class="floating-cta">
-    🎁 领取优惠券
-  </a>
+  <div class="floating-cta-wrapper">
+    <button class="floating-cta-btn" id="serviceQrBtn">
+      💬 添加客服 · 代充值
+    </button>
+    <div class="floating-cta-panel" id="serviceQrPanel" hidden>
+      <img src="https://github.com/zengliny/derouter-ai-key-top/raw/main/IMG_20260408_184216.png" alt="客服二维码" class="service-qr-img">
+      <p class="service-qr-desc">扫码添加客服，支持代充值服务</p>
+    </div>
+  </div>
+
+  <style>
+    .floating-cta-wrapper {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+    }
+    .floating-cta-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+      transition: all 0.3s ease;
+    }
+    .floating-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(102, 126, 234, 0.6);
+    }
+    .floating-cta-panel {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      min-width: 280px;
+    }
+    .service-qr-img {
+      width: 240px;
+      height: 240px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .service-qr-desc {
+      font-size: 13px;
+      color: #666;
+      margin: 0;
+    }
+  </style>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('serviceQrBtn');
+      var panel = document.getElementById('serviceQrPanel');
+      var isOpen = false;
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isOpen = !isOpen;
+        panel.hidden = !isOpen;
+      });
+      document.addEventListener('click', function(e) {
+        if (isOpen && !panel.contains(e.target) && e.target !== btn) {
+          isOpen = false;
+          panel.hidden = true;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
