@@ -1,0 +1,5 @@
+# https://docs.cloudflare.com/pages/configuration/
+
+build:
+  command: echo "No build step required - static site"
+  web_directory: .
