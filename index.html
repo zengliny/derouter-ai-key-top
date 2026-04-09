@@ -101,6 +101,16 @@
   </script>
 </head>
 <body>
+  <!-- 限时优惠横幅 -->
+  <div class="promo-banner" id="promoBanner">
+    <div class="promo-content">
+      <span class="promo-icon">🎁</span>
+      <span class="promo-text">限时优惠！新用户首充 <strong>满 $50 送 $20</strong></span>
+      <span class="promo-countdown">还剩 <strong id="promoTimer">23:59:59</strong></span>
+      <button class="promo-close" id="promoClose" aria-label="关闭">✕</button>
+    </div>
+  </div>
+
   <header class="header">
     <nav class="nav container">
       <a href="/" class="logo">
@@ -147,6 +157,39 @@
             <span class="proof-item">🔥 已服务 <strong>12,847+</strong> 用户</span>
             <span class="proof-item">💰 累计节省 <strong>$524,000+</strong></span>
             <span class="proof-item">⭐ 用户满意度 <strong>98.7%</strong></span>
+          </div>
+          <!-- 实时注册通知 -->
+          <div class="live-notification" id="liveNotification">
+            <span class="live-dot"></span>
+            <span class="live-text" id="liveText">📢 刚刚，** 市的用户注册成功</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-badges">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <span class="trust-icon">🔒</span>
+            <span class="trust-label">SSL 加密</span>
+            <span class="trust-desc">256位加密保护</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">💳</span>
+            <span class="trust-label">退款保证</span>
+            <span class="trust-desc">7天内无理由退款</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">🛡️</span>
+            <span class="trust-label">数据安全</span>
+            <span class="trust-desc">企业级安全标准</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">⚡</span>
+            <span class="trust-label">稳定服务</span>
+            <span class="trust-desc">99.9% SLA 保障</span>
           </div>
         </div>
       </div>
@@ -577,6 +620,82 @@ console.log(msg.content[0].text);</code></pre>
   </style>
 
   <script>
+    // 限时优惠倒计时
+    (function() {
+      var banner = document.getElementById('promoBanner');
+      var closeBtn = document.getElementById('promoClose');
+      var timerEl = document.getElementById('promoTimer');
+
+      // 存储关闭状态
+      var isClosed = localStorage.getItem('promoBannerClosed');
+      if (isClosed) {
+        banner.classList.add('hidden');
+        document.body.classList.remove('promo-active');
+      } else {
+        document.body.classList.add('promo-active');
+      }
+
+      closeBtn.addEventListener('click', function() {
+        banner.classList.add('hidden');
+        document.body.classList.remove('promo-active');
+        localStorage.setItem('promoBannerClosed', 'true');
+      });
+
+      // 倒计时逻辑（默认24小时，可配置）
+      var endTime = localStorage.getItem('promoEndTime');
+      if (!endTime) {
+        endTime = Date.now() + 24 * 60 * 60 * 1000; // 24小时后
+        localStorage.setItem('promoEndTime', endTime);
+      } else {
+        endTime = parseInt(endTime);
+      }
+
+      function updateTimer() {
+        var now = Date.now();
+        var remaining = endTime - now;
+
+        if (remaining <= 0) {
+          timerEl.textContent = '活动已结束';
+          return;
+        }
+
+        var hours = Math.floor(remaining / (1000 * 60 * 60));
+        var minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+        timerEl.textContent =
+          String(hours).padStart(2, '0') + ':' +
+          String(minutes).padStart(2, '0') + ':' +
+          String(seconds).padStart(2, '0');
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    })();
+
+    // 实时注册通知
+    (function() {
+      var notification = document.getElementById('liveNotification');
+      var textEl = document.getElementById('liveText');
+
+      var cities = ['北京', '上海', '深圳', '广州', '杭州', '成都', '武汉', '南京', '西安', '苏州'];
+      var actions = ['注册成功', '完成首充', '续费成功', '升级套餐'];
+
+      var randomCity = cities[Math.floor(Math.random() * cities.length)];
+      var randomAction = actions[Math.floor(Math.random() * actions.length)];
+      textEl.textContent = '📢 刚刚，' + randomCity + ' 的用户' + randomAction;
+
+      // 每10秒更新一次
+      setInterval(function() {
+        notification.style.animation = 'fadeInUp 0.5s ease';
+        setTimeout(function() {
+          var city = cities[Math.floor(Math.random() * cities.length)];
+          var action = actions[Math.floor(Math.random() * actions.length)];
+          textEl.textContent = '📢 刚刚，' + city + ' 的用户' + action;
+        }, 300);
+      }, 10000);
+    })();
+
     // 客服二维码浮动按钮
     (function() {
       var btn = document.getElementById('serviceQrBtn');
